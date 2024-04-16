@@ -5,8 +5,8 @@ import 'package:scanner/core/bloc/base_state.dart';
 import 'package:scanner/core/errors/failure.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scanner/features/auth/presentation/pages/login_page.dart';
+import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/route/presentation/bloc/route_bloc.dart';
-import 'package:scanner/pages/home/screens/home_page.dart';
 
 class RootPage extends StatelessWidget {
   const RootPage({super.key});
@@ -21,7 +21,7 @@ class RootPage extends StatelessWidget {
           listener: (context, state) {
             if (state is GotCheckAuth) {
               BlocProvider.of<AuthBloc>(context).add(OnCheckToken());
-              const HomePage().launch(
+              const DashboardPage().launch(
                 context,
                 isNewTask: true,
                 pageRouteAnimation: PageRouteAnimation.Fade,

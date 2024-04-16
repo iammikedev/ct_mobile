@@ -1,16 +1,14 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:scanner/features/auth/domain/entities/login_entity.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:scanner/features/auth/auth.dart';
 
-part 'login_model.freezed.dart';
-part 'login_model.g.dart';
+part 'login_model.mapper.dart';
 
-@freezed
-class LoginModel with _$LoginModel implements LoginEntity {
-  factory LoginModel({
-    required String message,
-    required String token,
-  }) = _LoginModel;
+@MappableClass()
+class LoginModel extends LoginEntity with LoginModelMappable {
+  const LoginModel({
+    required super.message,
+    required super.token,
+  });
 
-  factory LoginModel.fromJson(Map<String, Object?> json) =>
-      _$LoginModelFromJson(json);
+  static const fromJson = LoginModelMapper.fromMap;
 }

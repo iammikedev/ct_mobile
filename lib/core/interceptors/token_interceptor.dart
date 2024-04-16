@@ -6,8 +6,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:scanner/core/errors/exception.dart';
-import 'package:scanner/core/services/storage_service.dart';
-import 'package:scanner/features/auth/data/data.dart';
+import 'package:scanner/core/services/services.dart';
+import 'package:scanner/features/auth/auth.dart';
 
 class TokenInterception extends Interceptor {
   const TokenInterception(this._service);
@@ -21,7 +21,7 @@ class TokenInterception extends Interceptor {
   ) {
     try {
       final storage = _service.getStringValue('token');
-      final lm = LoginModel.fromJson(jsonDecode(storage));
+      final lm = LoginModelMapper.fromJson(jsonDecode(storage));
 
       if (!lm.token.isEmptyOrNull) {
         options.headers.addAll({

@@ -10,13 +10,18 @@ part 'scan_event.dart';
 part 'scan_state.dart';
 
 class ScanBloc extends Bloc<ScanEvent, ScanState> {
-  ScanBloc(this._scan) : super(InitialState()) {
+  ScanBloc(this._scan, this._getLogs) : super(InitialState()) {
     on<OnScan>(_onScan);
+    on<OnGetLogs>(_onGetLogs);
   }
 
   final ScanUsecase _scan;
+  final GetLogsUsecase _getLogs;
 
-  FutureOr<void> _onScan(OnScan event, Emitter<ScanState> emit) async {
+  FutureOr<void> _onScan(
+    OnScan event,
+    Emitter<ScanState> emit,
+  ) async {
     emit(LoadingState());
 
     final res = await _scan(event.code);
@@ -24,6 +29,20 @@ class ScanBloc extends Bloc<ScanEvent, ScanState> {
     res.fold(
       (l) => emit(ErrorState(l)),
       (r) => emit(GotScan(r)),
+    );
+  }
+
+  FutureOr<void> _onGetLogs(
+    OnGetLogs event,
+    Emitter<ScanState> emit,
+  ) async {
+    emit(LoadingState());
+
+    final res = await _getLogs(event.req);
+
+    res.fold(
+      (l) => emit(ErrorState(l)),
+      (r) => emit(SuccessState<List<LogsEntity>>(r)),
     );
   }
 }

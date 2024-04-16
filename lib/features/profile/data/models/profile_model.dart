@@ -1,24 +1,20 @@
-// ignore_for_file: invalid_annotation_target
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:scanner/features/profile/profile.dart';
 
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:scanner/features/profile/domain/entities/entities.dart';
+part 'profile_model.mapper.dart';
 
-part 'profile_model.freezed.dart';
-part 'profile_model.g.dart';
+@MappableClass(caseStyle: CaseStyle.snakeCase)
+class ProfileModel extends ProfileEntity with ProfileModelMappable {
+  const ProfileModel({
+    required super.id,
+    required super.userId,
+    required super.firstName,
+    required super.lastName,
+    required super.address,
+    required super.createdAt,
+    required super.updatedAt,
+    super.middleName,
+  });
 
-@freezed
-class ProfileModel with _$ProfileModel implements ProfileEntity {
-  factory ProfileModel({
-    required int id,
-    @JsonKey(name: 'user_id') required int userId,
-    @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'middle_name') String? middleName,
-    @JsonKey(name: 'last_name') required String lastName,
-    required String address,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
-  }) = _ProfileModel;
-
-  factory ProfileModel.fromJson(Map<String, Object?> json) =>
-      _$ProfileModelFromJson(json);
+  static const fromJson = ProfileModelMapper.fromMap;
 }

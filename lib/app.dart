@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:scanner/core/themes/branding.dart';
 import 'package:scanner/core/themes/sizing.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:scanner/features/route/presentation/bloc/route_bloc.dart';
 import 'package:scanner/features/route/presentation/pages/root_page.dart';
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (_) => sl.get<RouteBloc>()),
         BlocProvider(create: (_) => sl.get<ProfileBloc>()),
         BlocProvider(create: (_) => sl.get<ScanBloc>()),
+        BlocProvider(create: (_) => sl.get<DashboardBloc>()),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -28,6 +30,7 @@ class App extends StatelessWidget {
           primaryColor: Branding.primaryColor,
           appBarTheme: const AppBarTheme(scrolledUnderElevation: 0),
           inputDecorationTheme: const InputDecorationTheme(
+            isDense: true,
             hintStyle: TextStyle(
               color: Branding.hintTextColor,
             ),

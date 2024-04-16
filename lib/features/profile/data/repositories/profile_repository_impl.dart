@@ -32,7 +32,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
   Future<Either<Failure, ProfileEntity>> getCachedProfile() async {
     try {
       final profile = _storage.getStringValue('profile');
-      return Right(ProfileModel.fromJson(jsonDecode(profile)));
+      return Right(ProfileModelMapper.fromJson(jsonDecode(profile)));
     } on StorageException catch (e) {
       return Left(StorageFailure(e.message));
     }

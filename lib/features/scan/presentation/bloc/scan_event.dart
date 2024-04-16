@@ -14,3 +14,12 @@ class OnScan extends ScanEvent {
   @override
   List<Object> get props => [code];
 }
+
+class OnGetLogs extends ScanEvent {
+  const OnGetLogs(this.req);
+
+  final LogsParamsEntity req;
+
+  @override
+  List<Object> get props => [req];
+}

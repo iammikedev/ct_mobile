@@ -28,7 +28,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     final res = await _getProfile(NoParams());
 
-    res.fold((l) => emit(ErrorState(l)), (r) => emit(GotProfile(r)));
+    res.fold(
+      (l) => emit(ErrorState(l)),
+      (r) => emit(GotProfile(r)),
+    );
   }
 
   FutureOr<void> _onGetCachedProfile(
@@ -36,6 +39,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     final res = await _getCachedProfile(NoParams());
-    res.fold((l) => emit(ErrorState(l)), (r) => emit(GotCachedProfile(r)));
+    res.fold(
+      (l) => emit(ErrorState(l)),
+      (r) => emit(GotCachedProfile(r)),
+    );
   }
 }
