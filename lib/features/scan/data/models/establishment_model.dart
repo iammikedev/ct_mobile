@@ -3,14 +3,14 @@ import 'package:scanner/features/scan/domain/entities/entities.dart';
 
 part 'establishment_model.mapper.dart';
 
-@MappableClass()
+@MappableClass(caseStyle: CaseStyle.snakeCase, ignoreNull: true)
 class EstablishmentModel extends EstablishmentEntity
     with EstablishmentModelMappable {
   const EstablishmentModel({
     required super.id,
     required super.establishmentCode,
     required super.firstName,
-    required super.middleName,
+    super.middleName,
     required super.lastName,
     required super.emailAddress,
     required super.contactNumber,

@@ -12,9 +12,5 @@ abstract class ScanRemote {
   Future<ScanModel> scan(Map<String, dynamic> params);
 
   @GET('/scan')
-  Future<List<LogsModel>> getLogs(
-    @Query('type') String type,
-    @Query('page') int page,
-    @Query('limit') int limit,
-  );
+  Future<List<LogsModel>> getLogs(@Queries() Map<String, dynamic> params);
 }

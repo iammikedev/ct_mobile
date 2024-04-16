@@ -6,12 +6,9 @@ import 'package:scanner/core/themes/branding.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scanner/features/auth/presentation/pages/login_page.dart';
 import 'package:scanner/features/dashboard/dashboard.dart';
-import 'package:scanner/features/scan/presentation/pages/scan_page.dart';
+import 'package:scanner/features/home/home.dart';
+import 'package:scanner/features/scan/scan.dart';
 import 'package:scanner/pages/drawer/screens/app_drawer_widget.dart';
-import 'package:scanner/pages/logs/bloc/LogsBloc.dart';
-import 'package:scanner/settings/settings.dart';
-
-import '../../../home/presentation/pages/pages.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -24,7 +21,7 @@ class DashboardPageState extends State<DashboardPage> {
   final pageController = PageController();
   final pages = [
     const HomePage(),
-    Container(),
+    const LogsPage(),
     Container(),
     Container(),
   ];

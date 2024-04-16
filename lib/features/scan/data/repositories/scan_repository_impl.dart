@@ -24,8 +24,13 @@ class ScanRepositoryImpl extends ScanRepository {
     LogsParamsEntity params,
   ) async {
     try {
-      final res =
-          await _remote.getLogs(params.type.name, params.limit, params.page);
+      final model = LogsParamsModel(
+        limit: params.limit,
+        page: params.page,
+        type: params.type,
+      );
+
+      final res = await _remote.getLogs(model.toMap());
 
       return Right(res);
     } on DioException catch (e) {

@@ -13,6 +13,7 @@ class LogsParamsModelMapper extends ClassMapperBase<LogsParamsModel> {
   static LogsParamsModelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = LogsParamsModelMapper._());
+      LogTypeEnumMapper.ensureInitialized();
     }
     return _instance!;
   }

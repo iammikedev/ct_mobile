@@ -13,14 +13,14 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // BlocProvider.of<RouteBloc>(context).add(OnCheckAuth());
+    BlocProvider.of<RouteBloc>(context).add(OnCheckAuth());
 
     return MultiBlocListener(
       listeners: [
         BlocListener<RouteBloc, RouteState>(
           listener: (context, state) {
             if (state is GotCheckAuth) {
-              // BlocProvider.of<AuthBloc>(context).add(OnCheckToken());
+              BlocProvider.of<AuthBloc>(context).add(OnCheckToken());
               const DashboardPage().launch(
                 context,
                 isNewTask: true,

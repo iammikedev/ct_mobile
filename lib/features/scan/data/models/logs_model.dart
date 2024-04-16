@@ -6,7 +6,7 @@ import 'package:scanner/features/scan/scan.dart';
 
 part 'logs_model.mapper.dart';
 
-@MappableClass()
+@MappableClass(caseStyle: CaseStyle.snakeCase)
 class LogsModel extends LogsEntity with LogsModelMappable {
   const LogsModel({
     required super.id,

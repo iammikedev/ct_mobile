@@ -18,7 +18,7 @@ class OnScan extends ScanEvent {
 class OnGetLogs extends ScanEvent {
   const OnGetLogs(this.req);
 
-  final LogsParamsModel req;
+  final LogsParamsEntity req;
 
   @override
   List<Object> get props => [req];

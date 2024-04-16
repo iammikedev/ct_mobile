@@ -6,9 +6,11 @@ part 'logs_params_model.mapper.dart';
 
 @MappableClass()
 class LogsParamsModel extends LogsParamsEntity with LogsParamsModelMappable {
-  const LogsParamsModel({
+  LogsParamsModel({
     super.limit,
     super.page,
     super.type,
   });
+
+  static const fromJson = LogsParamsModelMapper.fromMap;
 }

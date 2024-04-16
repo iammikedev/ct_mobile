@@ -15,11 +15,6 @@ import 'package:scanner/features/profile/domain/repositories/repositories.dart';
 import 'package:scanner/features/profile/domain/usecases/usecases.dart';
 import 'package:scanner/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:scanner/features/route/presentation/bloc/route_bloc.dart';
-import 'package:scanner/features/scan/data/repositories/scan_repository_impl.dart';
-import 'package:scanner/features/scan/domain/repositories/repositories.dart';
-import 'package:scanner/features/scan/domain/usecases/get_logs_usecase.dart';
-import 'package:scanner/features/scan/domain/usecases/scan_usecase.dart';
-import 'package:scanner/features/scan/presentation/bloc/scan_bloc.dart';
 import 'package:scanner/features/scan/scan.dart';
 import 'features/profile/data/datasources/datasources.dart';
 

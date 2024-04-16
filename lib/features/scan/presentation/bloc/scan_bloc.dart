@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:scanner/core/bloc/base_state.dart';
-import 'package:scanner/features/scan/data/models/models.dart';
 import 'package:scanner/features/scan/domain/entities/entities.dart';
 import 'package:scanner/features/scan/domain/usecases/usecases.dart';
 
@@ -19,7 +18,10 @@ class ScanBloc extends Bloc<ScanEvent, ScanState> {
   final ScanUsecase _scan;
   final GetLogsUsecase _getLogs;
 
-  FutureOr<void> _onScan(OnScan event, Emitter<ScanState> emit) async {
+  FutureOr<void> _onScan(
+    OnScan event,
+    Emitter<ScanState> emit,
+  ) async {
     emit(LoadingState());
 
     final res = await _scan(event.code);
@@ -40,7 +42,7 @@ class ScanBloc extends Bloc<ScanEvent, ScanState> {
 
     res.fold(
       (l) => emit(ErrorState(l)),
-      (r) => emit(GotLogs(r)),
+      (r) => emit(SuccessState<List<LogsEntity>>(r)),
     );
   }
 }

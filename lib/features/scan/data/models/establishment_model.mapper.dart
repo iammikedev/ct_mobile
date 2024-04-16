@@ -24,27 +24,29 @@ class EstablishmentModelMapper extends ClassMapperBase<EstablishmentModel> {
   static const Field<EstablishmentModel, int> _f$id = Field('id', _$id);
   static String _$establishmentCode(EstablishmentModel v) =>
       v.establishmentCode;
-  static const Field<EstablishmentModel, String> _f$establishmentCode =
-      Field('establishmentCode', _$establishmentCode);
+  static const Field<EstablishmentModel, String> _f$establishmentCode = Field(
+      'establishmentCode', _$establishmentCode,
+      key: 'establishment_code');
   static String _$firstName(EstablishmentModel v) => v.firstName;
   static const Field<EstablishmentModel, String> _f$firstName =
-      Field('firstName', _$firstName);
-  static String _$middleName(EstablishmentModel v) => v.middleName;
+      Field('firstName', _$firstName, key: 'first_name');
+  static String? _$middleName(EstablishmentModel v) => v.middleName;
   static const Field<EstablishmentModel, String> _f$middleName =
-      Field('middleName', _$middleName);
+      Field('middleName', _$middleName, key: 'middle_name', opt: true);
   static String _$lastName(EstablishmentModel v) => v.lastName;
   static const Field<EstablishmentModel, String> _f$lastName =
-      Field('lastName', _$lastName);
+      Field('lastName', _$lastName, key: 'last_name');
   static String _$emailAddress(EstablishmentModel v) => v.emailAddress;
   static const Field<EstablishmentModel, String> _f$emailAddress =
-      Field('emailAddress', _$emailAddress);
+      Field('emailAddress', _$emailAddress, key: 'email_address');
   static String _$contactNumber(EstablishmentModel v) => v.contactNumber;
   static const Field<EstablishmentModel, String> _f$contactNumber =
-      Field('contactNumber', _$contactNumber);
+      Field('contactNumber', _$contactNumber, key: 'contact_number');
   static String _$establishmentName(EstablishmentModel v) =>
       v.establishmentName;
-  static const Field<EstablishmentModel, String> _f$establishmentName =
-      Field('establishmentName', _$establishmentName);
+  static const Field<EstablishmentModel, String> _f$establishmentName = Field(
+      'establishmentName', _$establishmentName,
+      key: 'establishment_name');
   static String _$address(EstablishmentModel v) => v.address;
   static const Field<EstablishmentModel, String> _f$address =
       Field('address', _$address);
@@ -63,10 +65,10 @@ class EstablishmentModelMapper extends ClassMapperBase<EstablishmentModel> {
       Field('status', _$status);
   static DateTime _$createdAt(EstablishmentModel v) => v.createdAt;
   static const Field<EstablishmentModel, DateTime> _f$createdAt =
-      Field('createdAt', _$createdAt);
+      Field('createdAt', _$createdAt, key: 'created_at');
   static DateTime _$updatedAt(EstablishmentModel v) => v.updatedAt;
   static const Field<EstablishmentModel, DateTime> _f$updatedAt =
-      Field('updatedAt', _$updatedAt);
+      Field('updatedAt', _$updatedAt, key: 'updated_at');
 
   @override
   final MappableFields<EstablishmentModel> fields = const {
@@ -87,6 +89,8 @@ class EstablishmentModelMapper extends ClassMapperBase<EstablishmentModel> {
     #createdAt: _f$createdAt,
     #updatedAt: _f$updatedAt,
   };
+  @override
+  final bool ignoreNull = true;
 
   static EstablishmentModel _instantiate(DecodingData data) {
     return EstablishmentModel(
@@ -197,7 +201,7 @@ class _EstablishmentModelCopyWithImpl<$R, $Out>
           {int? id,
           String? establishmentCode,
           String? firstName,
-          String? middleName,
+          Object? middleName = $none,
           String? lastName,
           String? emailAddress,
           String? contactNumber,
@@ -214,7 +218,7 @@ class _EstablishmentModelCopyWithImpl<$R, $Out>
         if (id != null) #id: id,
         if (establishmentCode != null) #establishmentCode: establishmentCode,
         if (firstName != null) #firstName: firstName,
-        if (middleName != null) #middleName: middleName,
+        if (middleName != $none) #middleName: middleName,
         if (lastName != null) #lastName: lastName,
         if (emailAddress != null) #emailAddress: emailAddress,
         if (contactNumber != null) #contactNumber: contactNumber,

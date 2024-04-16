@@ -21,7 +21,7 @@ class TokenInterception extends Interceptor {
   ) {
     try {
       final storage = _service.getStringValue('token');
-      final lm = LoginModel.fromJson(jsonDecode(storage));
+      final lm = LoginModelMapper.fromJson(jsonDecode(storage));
 
       if (!lm.token.isEmptyOrNull) {
         options.headers.addAll({

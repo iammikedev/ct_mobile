@@ -5,7 +5,7 @@ class EstablishmentEntity extends Equatable {
     required this.id,
     required this.establishmentCode,
     required this.firstName,
-    required this.middleName,
+    this.middleName,
     required this.lastName,
     required this.emailAddress,
     required this.contactNumber,
@@ -23,7 +23,7 @@ class EstablishmentEntity extends Equatable {
   final int id;
   final String establishmentCode;
   final String firstName;
-  final String middleName;
+  final String? middleName;
   final String lastName;
   final String emailAddress;
   final String contactNumber;

@@ -46,17 +46,10 @@ class _ScanRemote implements ScanRemote {
   }
 
   @override
-  Future<List<LogsModel>> getLogs(
-    String type,
-    int page,
-    int limit,
-  ) async {
+  Future<List<LogsModel>> getLogs(Map<String, dynamic> params) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'type': type,
-      r'page': page,
-      r'limit': limit,
-    };
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(params);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =

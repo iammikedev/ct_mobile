@@ -26,10 +26,10 @@ class LogsModelMapper extends ClassMapperBase<LogsModel> {
   static const Field<LogsModel, int> _f$id = Field('id', _$id);
   static DateTime _$createdAt(LogsModel v) => v.createdAt;
   static const Field<LogsModel, DateTime> _f$createdAt =
-      Field('createdAt', _$createdAt);
+      Field('createdAt', _$createdAt, key: 'created_at');
   static DateTime _$updatedAt(LogsModel v) => v.updatedAt;
   static const Field<LogsModel, DateTime> _f$updatedAt =
-      Field('updatedAt', _$updatedAt);
+      Field('updatedAt', _$updatedAt, key: 'updated_at');
   static EstablishmentModel? _$establishment(LogsModel v) => v.establishment;
   static const Field<LogsModel, EstablishmentModel> _f$establishment =
       Field('establishment', _$establishment, opt: true);
