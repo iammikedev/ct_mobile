@@ -1,18 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:scanner/features/auth/data/models/user_model.dart';
-import 'package:scanner/features/auth/domain/entities/register_entity.dart';
+// ignore_for_file: overridden_fields
 
-part 'register_model.freezed.dart'; 
-part 'register_model.g.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:scanner/features/auth/auth.dart';
 
-@freezed
-class RegisterModel with _$RegisterModel implements RegisterEntity {
-  const factory RegisterModel({
-    required String message,
-    required String token,
-    required UserModel user,
-  }) = _RegisterModel;
+part 'register_model.mapper.dart';
 
-  factory RegisterModel.fromJson(Map<String, Object?> json) =>
-      _$RegisterModelFromJson(json);
+@MappableClass(caseStyle: CaseStyle.snakeCase)
+class RegisterModel extends RegisterEntity with RegisterModelMappable {
+  const RegisterModel({
+    required super.message,
+    required super.token,
+    required this.user,
+  }) : super(user: user);
+
+  @override
+  final UserModel user;
+
+  static const fromJson = RegisterModelMapper.fromMap;
 }

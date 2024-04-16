@@ -5,23 +5,23 @@ import 'package:scanner/core/bloc/base_state.dart';
 import 'package:scanner/core/errors/failure.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scanner/features/auth/presentation/pages/login_page.dart';
+import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/route/presentation/bloc/route_bloc.dart';
-import 'package:scanner/pages/home/screens/home_page.dart';
 
 class RootPage extends StatelessWidget {
   const RootPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<RouteBloc>(context).add(OnCheckAuth());
+    // BlocProvider.of<RouteBloc>(context).add(OnCheckAuth());
 
     return MultiBlocListener(
       listeners: [
         BlocListener<RouteBloc, RouteState>(
           listener: (context, state) {
             if (state is GotCheckAuth) {
-              BlocProvider.of<AuthBloc>(context).add(OnCheckToken());
-              const HomePage().launch(
+              // BlocProvider.of<AuthBloc>(context).add(OnCheckToken());
+              const DashboardPage().launch(
                 context,
                 isNewTask: true,
                 pageRouteAnimation: PageRouteAnimation.Fade,

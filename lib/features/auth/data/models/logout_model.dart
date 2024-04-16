@@ -1,12 +1,11 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:scanner/features/auth/domain/domain.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:scanner/features/auth/auth.dart';
 
-part 'logout_model.g.dart';
+part 'logout_model.mapper.dart';
 
-@JsonSerializable()
-class LogoutModel extends LogoutEntity {
+@MappableClass()
+class LogoutModel extends LogoutEntity with LogoutModelMappable {
   const LogoutModel({required super.message});
 
-  factory LogoutModel.fromJson(Map<String, Object?> json) =>
-      _$LogoutModelFromJson(json);
+  static const fromJson = LogoutModelMapper.fromMap;
 }

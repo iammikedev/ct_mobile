@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:scanner/features/profile/presentation/widgets/profile_details_widget.dart';
-import 'package:scanner/pages/home/screens/home_page.dart';
+import 'package:scanner/pages/logs/screens/logs_page.dart';
 
 class AppDrawerWidget extends StatefulWidget {
   const AppDrawerWidget({super.key});
@@ -62,7 +63,7 @@ class DrawerMobileState extends State<AppDrawerWidget> {
                       ),
                     ),
                   ),
-                  onTap: () => const HomePage().launch(context),
+                  onTap: () => const DashboardPage().launch(context),
                 ),
                 ListTile(
                   title: Padding(
@@ -77,7 +78,7 @@ class DrawerMobileState extends State<AppDrawerWidget> {
                       ),
                     ),
                   ),
-                  onTap: () => Navigator.pushReplacementNamed(context, '/logs'),
+                  onTap: () => const LogsPage().launch(context),
                 ),
                 ListTile(
                   title: Padding(

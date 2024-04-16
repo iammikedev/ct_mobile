@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:scanner/features/scan/presentation/bloc/scan_bloc.dart';
-import 'package:scanner/pages/home/screens/home_page.dart';
+import 'package:scanner/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
@@ -32,7 +32,7 @@ class _ScanPageState extends State<ScanPage> {
     return BlocListener<ScanBloc, ScanState>(
       listener: (context, state) {
         if (state is GotScan) {
-          const HomePage().launch(context, isNewTask: true);
+          const DashboardPage().launch(context, isNewTask: true);
         }
       },
       child: Scaffold(

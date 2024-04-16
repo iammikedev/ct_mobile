@@ -5,10 +5,11 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:scanner/core/interceptors/token_interceptor.dart';
 import 'package:scanner/core/services/storage_service.dart';
 import 'package:scanner/core/utility/config.dart';
-import 'package:scanner/features/auth/data/datasources/auth_remote.dart';
+import 'package:scanner/features/auth/data/datasources/remote/auth_remote.dart';
 import 'package:scanner/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scanner/features/auth/domain/domain.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/profile/data/repositories/repositories.dart';
 import 'package:scanner/features/profile/domain/repositories/repositories.dart';
 import 'package:scanner/features/profile/domain/usecases/usecases.dart';
@@ -16,8 +17,10 @@ import 'package:scanner/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:scanner/features/route/presentation/bloc/route_bloc.dart';
 import 'package:scanner/features/scan/data/repositories/scan_repository_impl.dart';
 import 'package:scanner/features/scan/domain/repositories/repositories.dart';
+import 'package:scanner/features/scan/domain/usecases/get_logs_usecase.dart';
 import 'package:scanner/features/scan/domain/usecases/scan_usecase.dart';
 import 'package:scanner/features/scan/presentation/bloc/scan_bloc.dart';
+import 'package:scanner/features/scan/scan.dart';
 import 'features/profile/data/datasources/datasources.dart';
 
 final sl = GetIt.instance;
@@ -38,7 +41,8 @@ Future<void> init() async {
     ..registerFactory(() => RouteBloc())
     ..registerFactory(() => AuthBloc(sl(), sl(), sl(), sl()))
     ..registerFactory(() => ProfileBloc(sl(), sl()))
-    ..registerFactory(() => ScanBloc(sl()))
+    ..registerFactory(() => ScanBloc(sl(), sl()))
+    ..registerFactory(() => DashboardBloc())
 
     //Usecase
     ..registerLazySingleton(() => LoginUsecase(sl()))
@@ -52,10 +56,14 @@ Future<void> init() async {
 
     // Usecase - Scan
     ..registerLazySingleton(() => ScanUsecase(sl()))
+    ..registerLazySingleton(() => GetLogsUsecase(sl()))
 
     //Datasource - Auth
     ..registerLazySingleton(() => AuthRemote(sl()))
     ..registerLazySingleton(() => ProfileRemote(sl()))
+
+    //Datasource - Scan
+    ..registerLazySingleton(() => ScanRemote(sl()))
 
     //Repository
     ..registerLazySingleton<AuthRepository>(

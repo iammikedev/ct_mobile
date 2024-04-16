@@ -15,3 +15,12 @@ class GotScan extends ScanState {
   @override
   List<Object?> get props => [res];
 }
+
+class GotLogs extends ScanState {
+  const GotLogs(this.res);
+
+  final List<LogsEntity> res;
+
+  @override
+  List<Object?> get props => [res];
+}

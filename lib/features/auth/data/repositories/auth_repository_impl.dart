@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:scanner/core/errors/exception.dart';
 import 'package:scanner/core/errors/failure.dart';
 import 'package:scanner/core/services/storage_service.dart';
-import 'package:scanner/features/auth/data/datasources/auth_remote.dart';
+import 'package:scanner/features/auth/data/datasources/remote/auth_remote.dart';
 import 'package:scanner/features/auth/data/models/login_model.dart';
 import 'package:scanner/features/auth/data/models/login_params_model.dart';
 import 'package:scanner/features/auth/data/models/register_params_model.dart';
@@ -20,7 +20,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, LoginEntity>> login(LoginParamsModel params) async {
     try {
-      final res = await _remote.login(params.toJson());
+      final res = await _remote.login(params.toMap());
       await _storage.setStorageValue('token', jsonEncode(res.toJson()));
       return Right(res);
     } on DioException catch (e) {
@@ -35,7 +35,7 @@ class AuthRepositoryImpl extends AuthRepository {
     RegisterParamsModel params,
   ) async {
     try {
-      final res = await _remote.register(params.toJson());
+      final res = await _remote.register(params.toMap());
       await _storage.setStorageValue(
         'token',
         jsonEncode({
@@ -58,7 +58,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, LoginEntity>> checkToken() async {
     try {
       final token = _storage.getStringValue('token');
-      return Right(LoginModel.fromJson(jsonDecode(token)));
+      return Right(LoginModelMapper.fromJson(jsonDecode(token)));
     } on StorageException catch (e) {
       return Left(StorageFailure(e.message));
     }

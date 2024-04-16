@@ -10,7 +10,7 @@ import 'package:scanner/features/auth/data/models/login_params_model.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scanner/features/auth/presentation/pages/register_page.dart';
 import 'package:scanner/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:scanner/pages/home/screens/home_page.dart';
+import 'package:scanner/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -44,7 +44,7 @@ class LoginPageState extends State<LoginPage> {
         if (state is GotLogin) {
           EasyLoading.dismiss();
           BlocProvider.of<ProfileBloc>(context).add(OnGetProfile());
-          const HomePage().launch(context, isNewTask: true);
+          const DashboardPage().launch(context, isNewTask: true);
         }
 
         if (state is ErrorState) {

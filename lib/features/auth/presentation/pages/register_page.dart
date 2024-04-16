@@ -9,7 +9,7 @@ import 'package:scanner/core/themes/branding.dart';
 import 'package:scanner/core/themes/sizing.dart';
 import 'package:scanner/features/auth/data/models/register_params_model.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:scanner/pages/home/screens/home_page.dart';
+import 'package:scanner/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -51,7 +51,7 @@ class RegisterPageState extends State<RegisterPage> {
 
         if (state is GotRegister) {
           EasyLoading.dismiss();
-          const HomePage().launch(context, isNewTask: true);
+          const DashboardPage().launch(context, isNewTask: true);
         }
 
         if (state is ErrorState) {

@@ -1,18 +1,26 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:scanner/features/auth/data/models/models.dart';
-import 'package:scanner/features/scan/data/models/models.dart';
-import 'package:scanner/features/scan/domain/entities/entities.dart';
+// ignore_for_file: overridden_fields
 
-part 'scan_model.freezed.dart';
-part 'scan_model.g.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+import 'package:scanner/features/auth/auth.dart';
+import 'package:scanner/features/scan/scan.dart';
 
-@freezed
-class ScanModel with _$ScanModel implements ScanEntity {
-  factory ScanModel({
-    UserModel? user,
-    EstablishmentModel? establishment,
-  }) = _ScanModel;
+part 'scan_model.mapper.dart';
 
-  factory ScanModel.fromJson(Map<String, Object?> json) =>
-      _$ScanModelFromJson(json);
+@MappableClass()
+class ScanModel extends ScanEntity with ScanModelMappable {
+  const ScanModel({
+    this.establishment,
+    this.user,
+  }) : super(
+          establishment: establishment,
+          user: user,
+        );
+
+  @override
+  final EstablishmentModel? establishment;
+
+  @override
+  final UserModel? user;
+
+  static const fromJson = ScanModelMapper.fromMap;
 }

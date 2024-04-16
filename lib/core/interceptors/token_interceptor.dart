@@ -6,8 +6,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:scanner/core/errors/exception.dart';
-import 'package:scanner/core/services/storage_service.dart';
-import 'package:scanner/features/auth/data/data.dart';
+import 'package:scanner/core/services/services.dart';
+import 'package:scanner/features/auth/auth.dart';
 
 class TokenInterception extends Interceptor {
   const TokenInterception(this._service);
