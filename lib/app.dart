@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:scanner/core/themes/branding.dart';
+import 'package:scanner/core/themes/color_schemes.dart';
 import 'package:scanner/core/themes/sizing.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scanner/features/dashboard/dashboard.dart';
@@ -27,7 +28,9 @@ class App extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           fontFamily: 'Open Sans',
-          primaryColor: Branding.primaryColor,
+          colorScheme: lightColorScheme,
+          cardColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(scrolledUnderElevation: 0),
           inputDecorationTheme: const InputDecorationTheme(
             isDense: true,
