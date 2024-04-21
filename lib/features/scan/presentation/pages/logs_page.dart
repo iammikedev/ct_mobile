@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:scanner/core/bloc/base_state.dart';
 import 'package:scanner/core/enums/log_type_enum.dart';
 import 'package:scanner/core/themes/themes.dart';
@@ -75,7 +74,9 @@ class _LogsPageState extends State<LogsPage> {
                     const SizedBox(height: 4),
                     Text(
                       'View the latest logs here',
-                      style: textTheme.bodyLarge,
+                      style: textTheme.bodyLarge?.copyWith(
+                        color: Colors.black87,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Expanded(

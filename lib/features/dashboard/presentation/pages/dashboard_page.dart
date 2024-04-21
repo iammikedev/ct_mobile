@@ -8,6 +8,7 @@ import 'package:scanner/features/auth/presentation/pages/login_page.dart';
 import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/home/home.dart';
 import 'package:scanner/features/scan/scan.dart';
+import 'package:scanner/features/tips/tips.dart';
 import 'package:scanner/pages/drawer/screens/app_drawer_widget.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class DashboardPageState extends State<DashboardPage> {
   final pages = [
     const HomePage(),
     const LogsPage(),
-    Container(),
+    const TipsPage(),
     Container(),
   ];
 
