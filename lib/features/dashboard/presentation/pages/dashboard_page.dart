@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:scanner/core/bloc/base_state.dart';
 import 'package:scanner/core/themes/branding.dart';
-import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:scanner/features/auth/presentation/pages/login_page.dart';
+import 'package:scanner/features/auth/auth.dart';
 import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/home/home.dart';
+import 'package:scanner/features/profile/profile.dart';
 import 'package:scanner/features/scan/scan.dart';
 import 'package:scanner/features/tips/tips.dart';
-import 'package:scanner/pages/drawer/screens/app_drawer_widget.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -24,7 +23,7 @@ class DashboardPageState extends State<DashboardPage> {
     const HomePage(),
     const LogsPage(),
     const TipsPage(),
-    Container(),
+    const ProfilePage(),
   ];
 
   @override
@@ -59,7 +58,6 @@ class DashboardPageState extends State<DashboardPage> {
 
           return Scaffold(
               backgroundColor: Colors.white,
-              drawer: const AppDrawerWidget(),
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: _onScan,
                 backgroundColor: Branding.primaryColor,
