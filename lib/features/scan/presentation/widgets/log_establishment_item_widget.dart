@@ -13,6 +13,7 @@ class LogUserItemWidget extends StatelessWidget {
     return Card(
       elevation: 2,
       color: Colors.white,
+      borderOnForeground: false,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
