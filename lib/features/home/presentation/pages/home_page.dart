@@ -36,7 +36,9 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 'Check the latest health update',
-                style: textTheme.bodyLarge,
+                style: textTheme.bodyLarge?.copyWith(
+                  color: Colors.black87,
+                ),
               ),
               const SizedBox(height: 32),
               GridView(
