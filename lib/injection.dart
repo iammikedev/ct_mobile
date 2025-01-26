@@ -10,6 +10,7 @@ import 'package:scanner/features/auth/data/repositories/auth_repository_impl.dar
 import 'package:scanner/features/auth/domain/domain.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scanner/features/dashboard/dashboard.dart';
+import 'package:scanner/features/dashboard/presentation/bloc/stats_bloc.dart';
 import 'package:scanner/features/profile/data/repositories/repositories.dart';
 import 'package:scanner/features/profile/domain/repositories/repositories.dart';
 import 'package:scanner/features/profile/domain/usecases/usecases.dart';
@@ -38,12 +39,14 @@ Future<void> init() async {
     ..registerFactory(() => ProfileBloc(sl(), sl()))
     ..registerFactory(() => ScanBloc(sl(), sl()))
     ..registerFactory(() => DashboardBloc())
+    ..registerFactory(() => StatsBloc(sl()))
 
     //Usecase
     ..registerLazySingleton(() => LoginUsecase(sl()))
     ..registerLazySingleton(() => RegisterUsecase(sl()))
     ..registerLazySingleton(() => CheckTokenUsecase(sl()))
     ..registerLazySingleton(() => LogoutUsecase(sl()))
+    ..registerLazySingleton(() => GetStatsUsecase(sl()))
 
     //Usecase - Profile
     ..registerLazySingleton(() => GetProfileUsecase(sl()))
@@ -56,6 +59,7 @@ Future<void> init() async {
     //Datasource - Auth
     ..registerLazySingleton(() => AuthRemote(sl()))
     ..registerLazySingleton(() => ProfileRemote(sl()))
+    ..registerLazySingleton(() => StatsRemote(sl()))
 
     //Datasource - Scan
     ..registerLazySingleton(() => ScanRemote(sl()))
@@ -65,7 +69,10 @@ Future<void> init() async {
         () => AuthRepositoryImpl(sl(), sl()))
     ..registerLazySingleton<ProfileRepository>(
         () => ProfileRepositoryImpl(sl(), sl()))
-    ..registerLazySingleton<ScanRepository>(() => ScanRepositoryImpl(sl()));
+    ..registerLazySingleton<ScanRepository>(() => ScanRepositoryImpl(sl()))
+    ..registerLazySingleton<StatsRepository>(
+      () => StatsRepositoryImpl(remote: sl()),
+    );
 
   sl<Dio>()
     ..options.baseUrl = Config.baseUrl

@@ -57,7 +57,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, LoginEntity>> checkToken() async {
     try {
       final token = _storage.getStringValue('token');
-      return Right(LoginModelMapper.fromJson(jsonDecode(token)));
+      return Right(LoginModelMapper.fromJson(token));
     } on StorageException catch (e) {
       return Left(StorageFailure(e.message));
     }
