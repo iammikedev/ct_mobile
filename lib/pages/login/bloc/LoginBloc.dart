@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:scanner/bloc.dart';
 import 'package:scanner/pages/login/repo/UserRepo.dart';
-import 'package:scanner/validations/LoginValidation.dart';
 import 'package:scanner/pages/login/repo/LoginRepo.dart';
 
 class LoginBloc implements Bloc {

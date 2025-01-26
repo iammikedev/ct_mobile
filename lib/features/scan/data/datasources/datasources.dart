@@ -1,1 +1,1 @@
-export 'remote/scan_remote.dart';
+export 'remote/remote.dart';

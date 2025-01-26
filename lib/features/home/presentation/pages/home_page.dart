@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:scanner/core/themes/themes.dart';
+import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/home/home.dart';
 import 'package:scanner/features/profile/profile.dart';
 
@@ -11,6 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<ProfileBloc>(context).add(OnGetCachedProfile());
+    BlocProvider.of<StatsBloc>(context).add(const OnGetStats());
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
@@ -41,35 +43,47 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              GridView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 6,
-                  childAspectRatio: 1.5,
-                ),
-                children: [
-                  const CardStatsWidget(
-                    count: 120,
-                    title: 'Total Cases',
-                  ),
-                  const CardStatsWidget(
-                    count: 10,
-                    title: 'Active Cases',
-                    backgroundColor: Colors.indigo,
-                  ),
-                  CardStatsWidget(
-                    count: 50,
-                    title: 'Total Deaths',
-                    backgroundColor: Colors.red[300]!,
-                  ),
-                  CardStatsWidget(
-                    count: 60,
-                    title: 'Total Recoveries',
-                    backgroundColor: Colors.green[300]!,
-                  ),
-                ],
+              BlocBuilder<StatsBloc, StatsState>(
+                buildWhen: (previous, current) =>
+                    current is GetStatsSuccessState ||
+                    current is GetStatsLoadingState ||
+                    current is GetStatsErrorState,
+                builder: (context, state) {
+                  final isSuccess = state is GetStatsSuccessState;
+                  final stats = isSuccess ? state.stats : null;
+
+                  return GridView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 6,
+                      childAspectRatio: 1.5,
+                    ),
+                    children: [
+                      CardStatsWidget(
+                        count: stats?.totalCases ?? 0,
+                        title: 'Total Cases',
+                      ),
+                      CardStatsWidget(
+                        count: stats?.activeCases ?? 0,
+                        title: 'Active Cases',
+                        backgroundColor: Colors.indigo,
+                      ),
+                      CardStatsWidget(
+                        count: stats?.totalDeaths ?? 0,
+                        title: 'Total Deaths',
+                        backgroundColor: Colors.red[300]!,
+                      ),
+                      CardStatsWidget(
+                        count: stats?.totalRecoveries ?? 0,
+                        title: 'Total Recoveries',
+                        backgroundColor: Colors.green[300]!,
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: 32),
               Row(

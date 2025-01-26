@@ -7,7 +7,7 @@ part 'profile_model.mapper.dart';
 class ProfileModel extends ProfileEntity with ProfileModelMappable {
   const ProfileModel({
     required super.id,
-    required super.userId,
+    @MappableField(key: 'user_id') required super.userId,
     required super.firstName,
     required super.lastName,
     required super.address,
