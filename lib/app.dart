@@ -29,6 +29,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (_) => sl.get<AnnouncementBloc>()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Open Sans',
           colorScheme: lightColorScheme,
