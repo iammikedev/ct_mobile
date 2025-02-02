@@ -1,6 +1,4 @@
 // ignore_for_file: empty_catches
-
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -21,7 +19,7 @@ class TokenInterception extends Interceptor {
   ) {
     try {
       final storage = _service.getStringValue('token');
-      final lm = LoginModelMapper.fromJson(jsonDecode(storage));
+      final lm = LoginModelMapper.fromJson(storage);
 
       if (!lm.token.isEmptyOrNull) {
         options.headers.addAll({

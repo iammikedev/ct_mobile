@@ -1,12 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:scanner/pages/login/model/UserModel.dart';
 
 import '../../../bloc.dart';
 
 class HomeBloc implements Bloc {
-
   qrScanner({required BuildContext context}) async {
     // final result = await BarcodeScanner.scan();
     Navigator.pushNamed(context, '/qr');

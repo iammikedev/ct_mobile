@@ -8,12 +8,12 @@ class ProfileModel extends ProfileEntity with ProfileModelMappable {
   const ProfileModel({
     required super.id,
     @MappableField(key: 'user_id') required super.userId,
-    required super.firstName,
-    required super.lastName,
-    required super.address,
-    required super.createdAt,
-    required super.updatedAt,
-    super.middleName,
+    @MappableField(key: 'first_name') required super.firstName,
+    @MappableField(key: 'last_name') required super.lastName,
+    @MappableField(key: 'address') required super.address,
+    @MappableField(key: 'created_at') required super.createdAt,
+    @MappableField(key: 'updated_at') required super.updatedAt,
+    @MappableField(key: 'middle_name') super.middleName,
   });
 
   static const fromJson = ProfileModelMapper.fromMap;
