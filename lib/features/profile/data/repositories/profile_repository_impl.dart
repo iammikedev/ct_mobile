@@ -20,7 +20,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
   Future<Either<Failure, ProfileEntity>> getProfile() async {
     try {
       final res = await _remote.getProfile();
-      await _storage.setStorageValue('profile', jsonEncode(res.toJson()));
+      await _storage.setStorageValue('profile', res.toJson());
 
       return Right(res);
     } on DioException catch (e) {
@@ -32,7 +32,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
   Future<Either<Failure, ProfileEntity>> getCachedProfile() async {
     try {
       final profile = _storage.getStringValue('profile');
-      return Right(ProfileModelMapper.fromJson(jsonDecode(profile)));
+      return Right(ProfileModelMapper.fromMap(jsonDecode(profile)));
     } on StorageException catch (e) {
       return Left(StorageFailure(e.message));
     }

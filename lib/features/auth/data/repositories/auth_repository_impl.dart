@@ -20,7 +20,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, LoginEntity>> login(LoginParamsModel params) async {
     try {
       final res = await _remote.login(params.toMap());
-      await _storage.setStorageValue('token', jsonEncode(res.toJson()));
+      await _storage.setStorageValue('token', res.toJson());
       return Right(res);
     } on DioException catch (e) {
       return Left(ServerFailure(e.response!.data['message']));
@@ -43,7 +43,7 @@ class AuthRepositoryImpl extends AuthRepository {
         }),
       );
 
-      await _storage.setStorageValue('profile', jsonEncode(res.user.toJson()));
+      await _storage.setStorageValue('profile', res.user.toJson());
 
       return Right(res);
     } on DioException catch (e) {
@@ -57,7 +57,8 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<Failure, LoginEntity>> checkToken() async {
     try {
       final token = _storage.getStringValue('token');
-      return Right(LoginModelMapper.fromJson(token));
+      final decodedToken = jsonDecode(token);
+      return Right(LoginModelMapper.fromMap(decodedToken));
     } on StorageException catch (e) {
       return Left(StorageFailure(e.message));
     }

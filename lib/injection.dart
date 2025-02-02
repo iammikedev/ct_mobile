@@ -5,12 +5,12 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:scanner/core/interceptors/token_interceptor.dart';
 import 'package:scanner/core/services/storage_service.dart';
 import 'package:scanner/core/utility/config.dart';
+import 'package:scanner/features/announcement/announcement.dart';
 import 'package:scanner/features/auth/data/datasources/remote/auth_remote.dart';
 import 'package:scanner/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scanner/features/auth/domain/domain.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scanner/features/dashboard/dashboard.dart';
-import 'package:scanner/features/dashboard/presentation/bloc/stats_bloc.dart';
 import 'package:scanner/features/profile/data/repositories/repositories.dart';
 import 'package:scanner/features/profile/domain/repositories/repositories.dart';
 import 'package:scanner/features/profile/domain/usecases/usecases.dart';
@@ -40,6 +40,7 @@ Future<void> init() async {
     ..registerFactory(() => ScanBloc(sl(), sl()))
     ..registerFactory(() => DashboardBloc())
     ..registerFactory(() => StatsBloc(sl()))
+    ..registerFactory(() => AnnouncementBloc(sl()))
 
     //Usecase
     ..registerLazySingleton(() => LoginUsecase(sl()))
@@ -47,6 +48,7 @@ Future<void> init() async {
     ..registerLazySingleton(() => CheckTokenUsecase(sl()))
     ..registerLazySingleton(() => LogoutUsecase(sl()))
     ..registerLazySingleton(() => GetStatsUsecase(sl()))
+    ..registerLazySingleton(() => GetAnnouncementsUsecase(sl()))
 
     //Usecase - Profile
     ..registerLazySingleton(() => GetProfileUsecase(sl()))
@@ -60,6 +62,7 @@ Future<void> init() async {
     ..registerLazySingleton(() => AuthRemote(sl()))
     ..registerLazySingleton(() => ProfileRemote(sl()))
     ..registerLazySingleton(() => StatsRemote(sl()))
+    ..registerLazySingleton(() => AnnouncementRemote(sl()))
 
     //Datasource - Scan
     ..registerLazySingleton(() => ScanRemote(sl()))
@@ -72,6 +75,9 @@ Future<void> init() async {
     ..registerLazySingleton<ScanRepository>(() => ScanRepositoryImpl(sl()))
     ..registerLazySingleton<StatsRepository>(
       () => StatsRepositoryImpl(remote: sl()),
+    )
+    ..registerLazySingleton<AnnouncementRepository>(
+      () => AnnouncementRepositoryImpl(remote: sl()),
     );
 
   sl<Dio>()

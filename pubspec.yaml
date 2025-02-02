@@ -54,6 +54,7 @@ dependencies:
   infinite_scroll_pagination: ^4.0.0
   skeletonizer: ^1.1.1
   qr_flutter: ^4.1.0
+  flutter_widget_from_html_core: ^0.15.2
 
 dev_dependencies:
   flutter_test:
