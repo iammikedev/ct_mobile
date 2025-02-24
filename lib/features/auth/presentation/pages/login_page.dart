@@ -49,7 +49,6 @@ class LoginPageState extends State<LoginPage> {
 
           if (state is GotLogin) {
             EasyLoading.dismiss();
-            BlocProvider.of<ProfileBloc>(context).add(OnGetProfile());
           }
 
           if (state is ErrorState) {
