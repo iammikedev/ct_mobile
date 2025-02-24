@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void initializeCalls() {
-    getCachedProfile();
     getStats();
     getLatestAnnouncements();
   }
@@ -39,10 +38,6 @@ class _HomePageState extends State<HomePage> {
     BlocProvider.of<StatsBloc>(context).add(const OnGetStats());
   }
 
-  void getCachedProfile() {
-    BlocProvider.of<ProfileBloc>(context).add(OnGetCachedProfile());
-  }
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -50,16 +45,19 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: () async => initializeCalls(),
+          onRefresh: () async {
+            getProfile();
+            initializeCalls();
+          },
           child: SingleChildScrollView(
-            padding: Sizing.basePadding,
+            padding: Sizing.basePadding.copyWith(top: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 32),
                 BlocBuilder<ProfileBloc, ProfileState>(
+                  buildWhen: (previous, current) => current is GotProfile,
                   builder: (context, state) {
-                    final isSuccess = state is GotCachedProfile;
+                    final isSuccess = state is GotProfile;
                     final profile = isSuccess ? state.res : null;
                     return Text(
                       'Hello, ${profile?.firstName ?? ''}!',
@@ -195,5 +193,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void getProfile() {
+    BlocProvider.of<ProfileBloc>(context).add(OnGetProfile());
   }
 }

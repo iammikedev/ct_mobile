@@ -6,3 +6,4 @@ export 'services/services.dart';
 export 'themes/themes.dart';
 export 'usecases/usecases.dart';
 export 'utility/utility.dart';
+export 'extensions/extensions.dart';

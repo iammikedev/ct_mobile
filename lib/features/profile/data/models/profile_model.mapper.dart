@@ -13,6 +13,7 @@ class ProfileModelMapper extends ClassMapperBase<ProfileModel> {
   static ProfileModelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ProfileModelMapper._());
+      HealthStatusEnumMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -43,6 +44,9 @@ class ProfileModelMapper extends ClassMapperBase<ProfileModel> {
   static String? _$middleName(ProfileModel v) => v.middleName;
   static const Field<ProfileModel, String> _f$middleName =
       Field('middleName', _$middleName, key: 'middle_name', opt: true);
+  static HealthStatusEnum _$status(ProfileModel v) => v.status;
+  static const Field<ProfileModel, HealthStatusEnum> _f$status =
+      Field('status', _$status);
 
   @override
   final MappableFields<ProfileModel> fields = const {
@@ -54,6 +58,7 @@ class ProfileModelMapper extends ClassMapperBase<ProfileModel> {
     #createdAt: _f$createdAt,
     #updatedAt: _f$updatedAt,
     #middleName: _f$middleName,
+    #status: _f$status,
   };
 
   static ProfileModel _instantiate(DecodingData data) {
@@ -65,7 +70,8 @@ class ProfileModelMapper extends ClassMapperBase<ProfileModel> {
         address: data.dec(_f$address),
         createdAt: data.dec(_f$createdAt),
         updatedAt: data.dec(_f$updatedAt),
-        middleName: data.dec(_f$middleName));
+        middleName: data.dec(_f$middleName),
+        status: data.dec(_f$status));
   }
 
   @override
@@ -128,7 +134,8 @@ abstract class ProfileModelCopyWith<$R, $In extends ProfileModel, $Out>
       String? address,
       DateTime? createdAt,
       DateTime? updatedAt,
-      String? middleName});
+      String? middleName,
+      HealthStatusEnum? status});
   ProfileModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -149,7 +156,8 @@ class _ProfileModelCopyWithImpl<$R, $Out>
           String? address,
           DateTime? createdAt,
           DateTime? updatedAt,
-          Object? middleName = $none}) =>
+          Object? middleName = $none,
+          HealthStatusEnum? status}) =>
       $apply(FieldCopyWithData({
         if (id != null) #id: id,
         if (userId != null) #userId: userId,
@@ -158,7 +166,8 @@ class _ProfileModelCopyWithImpl<$R, $Out>
         if (address != null) #address: address,
         if (createdAt != null) #createdAt: createdAt,
         if (updatedAt != null) #updatedAt: updatedAt,
-        if (middleName != $none) #middleName: middleName
+        if (middleName != $none) #middleName: middleName,
+        if (status != null) #status: status
       }));
   @override
   ProfileModel $make(CopyWithData data) => ProfileModel(
@@ -169,7 +178,8 @@ class _ProfileModelCopyWithImpl<$R, $Out>
       address: data.get(#address, or: $value.address),
       createdAt: data.get(#createdAt, or: $value.createdAt),
       updatedAt: data.get(#updatedAt, or: $value.updatedAt),
-      middleName: data.get(#middleName, or: $value.middleName));
+      middleName: data.get(#middleName, or: $value.middleName),
+      status: data.get(#status, or: $value.status));
 
   @override
   ProfileModelCopyWith<$R2, ProfileModel, $Out2> $chain<$R2, $Out2>(

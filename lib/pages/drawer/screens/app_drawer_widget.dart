@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:scanner/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scanner/features/dashboard/dashboard.dart';
-import 'package:scanner/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:scanner/features/profile/presentation/widgets/profile_details_widget.dart';
 import 'package:scanner/pages/logs/screens/logs_page.dart';
 
@@ -20,7 +19,6 @@ class AppDrawerWidget extends StatefulWidget {
 class DrawerMobileState extends State<AppDrawerWidget> {
   @override
   void initState() {
-    BlocProvider.of<ProfileBloc>(context).add(OnGetCachedProfile());
     super.initState();
   }
 
