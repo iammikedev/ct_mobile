@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:scanner/core/core.dart';
 import 'package:scanner/features/profile/profile.dart';
 
 part 'profile_model.mapper.dart';
@@ -14,6 +15,7 @@ class ProfileModel extends ProfileEntity with ProfileModelMappable {
     @MappableField(key: 'created_at') required super.createdAt,
     @MappableField(key: 'updated_at') required super.updatedAt,
     @MappableField(key: 'middle_name') super.middleName,
+    @MappableField(key: 'status') required super.status,
   });
 
   static const fromJson = ProfileModelMapper.fromMap;

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:scanner/core/bloc/base_state.dart';
-import 'package:scanner/core/themes/branding.dart';
+import 'package:scanner/core/core.dart';
 import 'package:scanner/features/auth/auth.dart';
 import 'package:scanner/features/dashboard/dashboard.dart';
 import 'package:scanner/features/home/home.dart';
@@ -28,7 +27,7 @@ class DashboardPageState extends State<DashboardPage> {
 
   @override
   void initState() {
-    BlocProvider.of<ProfileBloc>(context).add(OnGetProfile());
+    getProfile();
     super.initState();
   }
 
@@ -40,29 +39,47 @@ class DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if (state is GotLogout) {
-              const LoginPage().launch(context, isNewTask: true);
-            }
-          },
-        ),
-        BlocListener<DashboardBloc, DashboardState>(
-          listener: (context, state) {
-            if (state is SuccessState<int>) {
-              pageController.jumpToPage(state.data);
-            }
-          },
-        ),
-      ],
-      child: BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (context, state) {
-          final isSuccess = state is SuccessState<int>;
-          final page = isSuccess ? state.data : 0;
+    final textTheme = Theme.of(context).textTheme;
 
-          return Scaffold(
+    return RefreshIndicator(
+      onRefresh: () async => getProfile(),
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is GotLogout) {
+                const LoginPage().launch(context, isNewTask: true);
+              }
+            },
+          ),
+          BlocListener<DashboardBloc, DashboardState>(
+            listener: (context, state) {
+              if (state is SuccessState<int>) {
+                pageController.jumpToPage(state.data);
+              }
+            },
+          ),
+        ],
+        child: BlocBuilder<DashboardBloc, DashboardState>(
+          builder: (context, state) {
+            final isSuccess = state is SuccessState<int>;
+            final page = isSuccess ? state.data : 0;
+
+            return Scaffold(
+              appBar: AppBar(
+                title: Row(
+                  children: [
+                    Image.asset('assets/img/logo.png', height: 20),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Gapo Tracer',
+                      style: textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               backgroundColor: Colors.white,
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: _onScan,
@@ -99,17 +116,39 @@ class DashboardPageState extends State<DashboardPage> {
               ),
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.centerDocked,
-              body: PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: pageController,
-                children: pages,
-              ));
-        },
+              body: BlocBuilder<ProfileBloc, ProfileState>(
+                buildWhen: (previous, current) => current is GotProfile,
+                builder: (context, state) {
+                  final isSuccess = state is GotProfile;
+                  final status = isSuccess ? state.res.status : null;
+
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ExposureBannerWidget(status: status),
+                      Expanded(
+                        child: PageView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          controller: pageController,
+                          children: pages,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 
   void _onScan() {
     const ScanPage().launch(context);
+  }
+
+  void getProfile() {
+    BlocProvider.of<ProfileBloc>(context).add(OnGetProfile());
   }
 }

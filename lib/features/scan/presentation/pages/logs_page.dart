@@ -4,6 +4,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:scanner/core/bloc/base_state.dart';
 import 'package:scanner/core/enums/log_type_enum.dart';
 import 'package:scanner/core/themes/themes.dart';
+import 'package:scanner/features/profile/profile.dart';
 import 'package:scanner/features/scan/scan.dart';
 
 class LogsPage extends StatefulWidget {
@@ -33,6 +34,10 @@ class _LogsPageState extends State<LogsPage> {
     super.dispose();
   }
 
+  void getProfile() {
+    BlocProvider.of<ProfileBloc>(context).add(OnGetProfile());
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -55,51 +60,51 @@ class _LogsPageState extends State<LogsPage> {
         }
       },
       builder: (context, state) {
-        return DefaultTabController(
-          length: 2,
-          child: Scaffold(
-            body: SafeArea(
-              child: Padding(
-                padding: Sizing.basePadding,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 32),
-                    Text(
-                      'Logs',
-                      style: textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+        return RefreshIndicator(
+          onRefresh: () async => getProfile(),
+          child: DefaultTabController(
+            length: 2,
+            child: Scaffold(
+              body: SafeArea(
+                child: Padding(
+                  padding: Sizing.basePadding.copyWith(top: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'History',
+                        style: textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'View the latest logs here',
-                      style: textTheme.bodyLarge?.copyWith(
-                        color: Colors.black87,
+                      const SizedBox(height: 4),
+                      Text(
+                        'View the latest logs here',
+                        style: textTheme.bodyLarge?.copyWith(
+                          color: Colors.black87,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          TabBar(
-                            onTap: (value) {
-                              setState(() => currentTab = value);
-                              pagingController.refresh();
-                            },
-                            tabs: const [
-                              Tab(icon: Icon(Icons.storefront)),
-                              Tab(icon: Icon(Icons.person)),
-                            ],
-                          ),
-                          Expanded(
-                            child: TabBarView(
-                              children: [
-                                SingleChildScrollView(
-                                  child: PagedListView.separated(
+                      const SizedBox(height: 16),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            TabBar(
+                              onTap: (value) {
+                                setState(() => currentTab = value);
+                                pagingController.refresh();
+                              },
+                              tabs: const [
+                                Tab(icon: Icon(Icons.storefront)),
+                                Tab(icon: Icon(Icons.person)),
+                              ],
+                            ),
+                            Expanded(
+                              child: TabBarView(
+                                children: [
+                                  PagedListView.separated(
                                     shrinkWrap: true,
                                     physics:
-                                        const NeverScrollableScrollPhysics(),
+                                        const AlwaysScrollableScrollPhysics(),
                                     pagingController: pagingController,
                                     builderDelegate:
                                         PagedChildBuilderDelegate<LogsEntity>(
@@ -112,12 +117,10 @@ class _LogsPageState extends State<LogsPage> {
                                       return const SizedBox(height: 4);
                                     },
                                   ),
-                                ),
-                                SingleChildScrollView(
-                                  child: PagedListView.separated(
+                                  PagedListView.separated(
                                     shrinkWrap: true,
                                     physics:
-                                        const NeverScrollableScrollPhysics(),
+                                        const AlwaysScrollableScrollPhysics(),
                                     pagingController: pagingController,
                                     builderDelegate:
                                         PagedChildBuilderDelegate<LogsEntity>(
@@ -129,14 +132,14 @@ class _LogsPageState extends State<LogsPage> {
                                       return const SizedBox(height: 8);
                                     },
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

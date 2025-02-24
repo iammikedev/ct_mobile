@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:scanner/core/core.dart';
 
 class ProfileEntity extends Equatable {
   const ProfileEntity({
@@ -10,6 +11,7 @@ class ProfileEntity extends Equatable {
     required this.address,
     required this.createdAt,
     required this.updatedAt,
+    required this.status,
   });
 
   final int id;
@@ -20,6 +22,7 @@ class ProfileEntity extends Equatable {
   final String address;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final HealthStatusEnum status;
 
   @override
   List<Object?> get props => [
@@ -31,5 +34,6 @@ class ProfileEntity extends Equatable {
         address,
         createdAt,
         updatedAt,
+        status,
       ];
 }
