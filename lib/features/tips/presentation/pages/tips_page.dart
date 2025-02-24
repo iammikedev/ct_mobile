@@ -34,7 +34,7 @@ class TipsPageState extends State<TipsPage> {
               ),
               const SizedBox(height: 20),
               Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non finibus metus. Quisque scelerisque velit id ligula hendrerit, eu tempor diam placerat.',
+                'COVID-19 remains a concern, and taking simple precautions can help protect ourselves and others. By following these basic safety measures, we can reduce the risk of infection and maintain a healthier environment.',
                 style: textTheme.bodyMedium?.copyWith(
                   color: Colors.black87,
                 ),
@@ -47,7 +47,7 @@ class TipsPageState extends State<TipsPage> {
                   Image.asset('assets/img/washing-hands.png'),
                   const SizedBox(height: 24),
                   Text(
-                    'Wash your hands regularly',
+                    'Wash Your Hands Regularly',
                     style: textTheme.titleLarge,
                   ),
                   const SizedBox(height: 12),
@@ -56,7 +56,7 @@ class TipsPageState extends State<TipsPage> {
                       horizontal: 16,
                     ),
                     child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non finibus metus.',
+                      'Use soap and water for at least 20 seconds. If soap and water are unavailable, use a hand sanitizer with at least 60% alcohol. Wash hands after touching surfaces, coughing, sneezing, or before eating',
                       style: textTheme.bodyMedium?.copyWith(
                         color: Colors.black87,
                       ),
@@ -73,14 +73,14 @@ class TipsPageState extends State<TipsPage> {
                   Image.asset('assets/img/social-distancing.png'),
                   const SizedBox(height: 24),
                   Text(
-                    'Social Distancing',
+                    'Practice Social Distancing',
                     style: textTheme.titleLarge,
                   ),
                   const SizedBox(height: 12),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non finibus metus.',
+                      'Maintain at least 6 feet (about 2 meters) of distance from others. Avoid crowded places and close-contact settings. Limit unnecessary physical contact, such as handshakes or hugs.',
                       style: textTheme.bodyMedium?.copyWith(
                         color: Colors.black87,
                       ),
@@ -97,14 +97,14 @@ class TipsPageState extends State<TipsPage> {
                   Image.asset('assets/img/face-mask.png'),
                   const SizedBox(height: 24),
                   Text(
-                    'Always wear your mask',
+                    'Always Wear Your Mask',
                     style: textTheme.titleLarge,
                   ),
                   const SizedBox(height: 12),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non finibus metus.',
+                      'Wear a mask that covers both your nose and mouth. Use a high-quality mask, especially in crowded or indoor areas. Replace disposable masks regularly and wash reusable masks after each use.',
                       style: textTheme.bodyMedium?.copyWith(
                         color: Colors.black87,
                       ),
