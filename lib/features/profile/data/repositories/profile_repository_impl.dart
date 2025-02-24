@@ -20,8 +20,6 @@ class ProfileRepositoryImpl extends ProfileRepository {
   Future<Either<Failure, ProfileEntity>> getProfile() async {
     try {
       final res = await _remote.getProfile();
-      await _storage.setStorageValue('profile', res.toJson());
-
       return Right(res);
     } on DioException catch (e) {
       return Left(ServerFailure(e.response!.data['message']));

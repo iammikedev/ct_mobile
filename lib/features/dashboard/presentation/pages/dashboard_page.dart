@@ -27,6 +27,12 @@ class DashboardPageState extends State<DashboardPage> {
   ];
 
   @override
+  void initState() {
+    BlocProvider.of<ProfileBloc>(context).add(OnGetProfile());
+    super.initState();
+  }
+
+  @override
   void dispose() {
     pageController.dispose();
     super.dispose();
